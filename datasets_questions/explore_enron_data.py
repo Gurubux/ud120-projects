@@ -17,6 +17,18 @@
 
 import pickle
 
-enron_data = pickle.load(open("../final_project/final_project_dataset.pkl", "rb"))
+enron_data = pickle.load(open("../final_project/final_project_dataset_unix.pkl", "rb"))
+#print(enron_data)
+#print(enron_data.keys())
+print(len(enron_data.keys()))
+print(len(enron_data['DONAHUE JR JEFFREY M'].values()))
 
+#print([enron_data[key] for key in enron_data])
+print(len([enron_data[key] for key in enron_data if enron_data[key]["poi"]==1]))
 
+print(enron_data['PRENTICE JAMES']["total_stock_value"])
+print(enron_data['COLWELL WESLEY']["from_this_person_to_poi"])
+print(enron_data['SKILLING JEFFREY K']["exercised_stock_options"])
+print(enron_data['LAY KENNETH L']["total_payments"])
+print(len([enron_data[key] for key in enron_data if enron_data[key]["salary"]!='NaN']))
+print(len([enron_data[key] for key in enron_data if enron_data[key]["email_address"]!='NaN']))
