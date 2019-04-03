@@ -1,6 +1,11 @@
 #!/usr/bin/python
 
 """
+Created on Tue Apr  2 16:06:03 2019
+
+@author: Guru
+"""
+"""
     Starter code for the regression mini-project.
     
     Loads up/formats a modified version of the dataset
@@ -17,7 +22,7 @@ import sys
 import pickle
 sys.path.append("../tools/")
 from feature_format import featureFormat, targetFeatureSplit
-dictionary = pickle.load( open("../final_project/final_project_dataset_modified.pkl", "r") )
+dictionary = pickle.load( open("../final_project/final_project_dataset_modified_unix.pkl", "rb") )
 
 ### list the features you want to look at--first item in the 
 ### list will be the "target" feature
@@ -29,7 +34,7 @@ target, features = targetFeatureSplit( data )
 from sklearn.cross_validation import train_test_split
 feature_train, feature_test, target_train, target_test = train_test_split(features, target, test_size=0.5, random_state=42)
 train_color = "b"
-test_color = "b"
+test_color = "r"
 
 
 
@@ -38,6 +43,10 @@ test_color = "b"
 ### plots it correctly. Don't forget to change the test_color above from "b" to
 ### "r" to differentiate training points from test points.
 
+
+from sklearn.linear_model import LinearRegression
+reg = LinearRegression()
+reg = reg.fit(feature_train,target_train)
 
 
 
@@ -68,3 +77,10 @@ plt.xlabel(features_list[1])
 plt.ylabel(features_list[0])
 plt.legend()
 plt.show()
+
+print(reg.predict(490000))
+print("Slope ",reg.coef_)
+print("Intercept ", reg.intercept_)
+
+print('r-Squared on Testing set',reg.score(feature_test,target_test))
+print('r-Squared on Training set',reg.score(feature_train,target_train))
