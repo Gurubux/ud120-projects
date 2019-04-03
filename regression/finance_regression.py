@@ -27,7 +27,8 @@ dictionary = pickle.load( open("../final_project/final_project_dataset_modified_
 ### list the features you want to look at--first item in the 
 ### list will be the "target" feature
 features_list = ["bonus", "salary"]
-data = featureFormat( dictionary, features_list, remove_any_zeroes=True)
+#features_list = ["bonus", "long_term_incentive"]
+data = featureFormat( dictionary, features_list, remove_any_zeroes=True,sort_keys = '../tools/python2_lesson06_keys_unix.pkl')
 target, features = targetFeatureSplit( data )
 
 ### training-testing split needed in regression, just like classification
@@ -73,10 +74,16 @@ try:
     plt.plot( feature_test, reg.predict(feature_test) )
 except NameError:
     pass
+
+""" Later Correction """
+reg.fit(feature_test, target_test)
+plt.plot(feature_train, reg.predict(feature_train), color="y")
+""" Later Correction """
 plt.xlabel(features_list[1])
 plt.ylabel(features_list[0])
 plt.legend()
 plt.show()
+""" Later Correction """
 
 print(reg.predict(490000))
 print("Slope ",reg.coef_)
@@ -84,3 +91,23 @@ print("Intercept ", reg.intercept_)
 
 print('r-Squared on Testing set',reg.score(feature_test,target_test))
 print('r-Squared on Training set',reg.score(feature_train,target_train))
+
+"""
+#Salary-Bonus
+r-Squared on Testing set -1.484992417368511
+r-Squared on Training set 0.04550919269952436
+
+#long_term_incentive-Bonus
+r-Squared on Testing set -0.5927128999498643
+r-Squared on Training set 0.21708597125777662
+
+
+#Salary-Bonus
+Slope  [2.27410114]
+Intercept  124444.38886605436
+r-Squared on Testing set 0.251488150398397
+r-Squared on Training set -0.12359798540343814
+The slope is about 2.27 after removing the outlier, 
+which is a big difference from what we had before (about 5.4). 
+A small number of outliers makes a big difference!
+"""
