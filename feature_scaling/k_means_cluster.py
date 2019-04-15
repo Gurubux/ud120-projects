@@ -90,5 +90,9 @@ print(max([data_dict[key]["exercised_stock_options"] for key in data_dict if dat
 print(max([data_dict[key]["salary"] for key in data_dict if data_dict[key]["salary"]!='NaN']))
 print(min([data_dict[key]["salary"] for key in data_dict if data_dict[key]["salary"]!='NaN']))
 
+
+from Code_Min_Max_Rescalar import featureScaling
+print('Rescaled salary ',featureScaling([f1 for f1, f2 in finance_features]))
+print('Rescaled exercised_stock_options ',featureScaling([f2 for f1, f2 in finance_features]))
 from Code_Min_Max_Rescalar import minmaxscalar
 minmaxscalar(finance_features)
